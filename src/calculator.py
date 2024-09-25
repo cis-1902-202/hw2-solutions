@@ -1,6 +1,6 @@
 # PART 1
 
-# TODO: this should be a fairly trivial class to implement
+# DONE: this should be a fairly trivial class to implement
 # the main thing is dealing with user input and parsing the equation
 # We make the following assumptions for the input:
 # - there is only two operations allowed: addition and subtraction
