@@ -1,7 +1,7 @@
 # PART 2 (Part 1 is the `calculator` module)
 
-import os
 import itertools
+import os
 from functools import lru_cache
 
 

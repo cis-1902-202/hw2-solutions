@@ -53,7 +53,7 @@ def validate_equation(equation: str) -> bool:
     # numbers and operators alternate
     for i in range(len(values)):
         if i % 2 == 0:
-            if values[i].isdigit() == False:
+            if not values[i].isdigit():
                 return False
         else:
             if values[i] != "+" and values[i] != "-":
@@ -65,7 +65,7 @@ def validate_equation(equation: str) -> bool:
 
 def process_equation(equation: str) -> int:
     if not validate_equation(equation):
-        raise Exception("Invalid equation")
+        raise ValueError("Invalid equation")
 
     values = equation.split()
     if len(values) == 0:
@@ -104,8 +104,8 @@ def main():
         try:
             value = process_equation(equation)
             print(value)
-        except:
-            print("Error: Invalid equation")
+        except ValueError as e:
+            print(f"Error: {e}")
 
 
 if __name__ == "__main__":
