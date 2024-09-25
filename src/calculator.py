@@ -11,36 +11,77 @@
 
 class Calculator:
     def __init__(self, state: int = 0):
-        # TODO: (2 pts)
-        pass
+        # DONE: (2 pts)
+        self.state = state
 
     def add(self, value: int) -> None:
         """
         Add value to the current state
         """
-        # TODO: (2 pts)
-        pass
+        # DONE: (2 pts)
+        self.state += value
 
     def subtract(self, value: int) -> None:
         """
         Subtract value from the current state
         """
-        # TODO: (2 pts)
-        pass
+        # DONE: (2 pts)
+        self.state -= value
 
     def get_state(self) -> int:
         """
         Get the current state
         """
-        # TODO: (2 pts)
-        pass
+        # DONE: (2 pts)
+        return self.state
 
     def reset(self) -> None:
         """
         Reset the current state to 0
         """
-        # TODO: (2 pts)
-        pass
+        # DONE: (2 pts)
+        self.state = 0
+
+
+def validate_equation(equation: str) -> bool:
+    values = equation.split()
+
+    # nonempty equation
+    if len(values) == 0:
+        return False
+
+    # numbers and operators alternate
+    for i in range(len(values)):
+        if i % 2 == 0:
+            if values[i].isdigit() == False:
+                return False
+        else:
+            if values[i] != "+" and values[i] != "-":
+                return False
+
+    # last value is a number
+    return len(values) % 2 == 1
+
+
+def process_equation(equation: str) -> int:
+    if not validate_equation(equation):
+        raise Exception("Invalid equation")
+
+    values = equation.split()
+    if len(values) == 0:
+        return 0
+
+    calculator = Calculator(state=int(values[0]))
+
+    op = None
+    for i in range(1, len(values), 2):
+        if values[i] == "+":
+            op = calculator.add
+        else:
+            op = calculator.subtract
+        op(int(values[i + 1]))
+
+    return calculator.get_state()
 
 
 def main():
@@ -58,8 +99,13 @@ def main():
         Enter an equation: 5 ++ 3 - 1
         Error: Invalid equation
     """
-    # TODO: (15 pts)
-    pass
+    while True:
+        equation = input("Enter an equation: ")
+        try:
+            value = process_equation(equation)
+            print(value)
+        except:
+            print("Error: Invalid equation")
 
 
 if __name__ == "__main__":
